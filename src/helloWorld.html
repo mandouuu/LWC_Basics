@@ -1,0 +1,38 @@
+<template>
+  hello, {firstName} !
+  <br/>
+  <template if:false={showMtnInfo}>
+    <lightning-input label=" " placeholder="mountain" onkeypress={handleNameChange}> </lightning-input>
+  </template>
+
+  <template if:false={showMtnInfo}>
+    <ul class="slds-m-around_medium">
+      <template for:each={listofMtns} for:item="mountain">
+        <li key={mountain.Id}>
+          {mountain.Name}
+        </li>
+      </template>
+
+    </ul>
+    <template if:true={emptyMtnList}>
+      <Lightning-button label='empty list' onclick={handleEmptyMtnList}>
+
+      </Lightning-button>
+      <Lightning-button label='view info' onclick={handleGenerateMtnInfo}>
+      </Lightning-button>
+    </template>
+  </template>
+
+  <template if:true={showMtnInfo}>
+    the mountains you visited till now are :
+    <Lightning-button label='add more mountains' onclick={handleAddMoreMtn}>
+    </Lightning-button>
+    <div class="slds-grid slds-wrap slds-gutters_xx-small slds-m-top_x-small">
+      <template for:each={listofMtns} for:item="mountain">
+        <div class="slds-col slds-size_6-of-12 slds-m-top_x-small" key={mountain.Id}>
+          <c-mountain mountain-name={mountain.Name}> </c-mountain>
+        </div>
+      </template>
+    </div>
+  </template>
+</template>
